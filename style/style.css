@@ -1,0 +1,46 @@
+
+.computerImg {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.spaceHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chosenOp {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 150px;
+    height: 150px;
+    background-color: skyblue;
+}
+
+.chosenMe {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 150px;
+    height: 150px;
+    background-color: coral;
+}
+
+.choices {
+    padding: 25px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 

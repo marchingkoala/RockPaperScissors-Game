@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+<body>
+    <div class="playinfield">
+    
+        <div class="computerImg">
+            <img src="./robot.png" width="300" height="auto">
+        </div>
+        <div class="spaceHolder">
+            <div class="chosenOp"></div>
+            <div class="chosenMe"></div>
+        </div>
+        <div class="choices">
+            <form method="POST" action="/game">
+    
+                <input type="submit" id="rock" name="rock" value="ROCK">
+                <input type="submit" id="paper" name="paper" value="PAPER">
+                <input type="submit" id="scissors" name="scissors" value="SCISSORS">
+    
+            </form>
+        </div>
+        <div class="playerImg">
+            <img src="/imgs/brain.png" width="300" height="auto">
+        </div>
+    
+    </div>
+</body>
+</html>
