@@ -156,6 +156,8 @@ router.post("/game", async (req, res, next) => {
     let robotsChoice = choices[randomNum];
     let finalResult = "";
 
+    const user = await Player.findAll();
+
     const gameOn = (yourChoice, robotsChoice) => {
       if (yourChoice === robotsChoice) {
         finalResult = "tie";
@@ -171,11 +173,15 @@ router.post("/game", async (req, res, next) => {
     };
     await gameOn(clickedVal, robotsChoice);
 
-    const gameResult = await Game.create({
+    const gameResult = await Game.findOne({
       where: {
         result: `${finalResult}`,
       },
     });
+
+    await Game.update(
+      {playerId: user.id}, {where: {result : `${finalResult}`}}
+   )
 
     console.log(gameResult.id);
 
@@ -185,6 +191,8 @@ router.post("/game", async (req, res, next) => {
     next(error);
   }
 });
+
+
 
 router.use((err, req, res, next) => {
   console.log(err.stack);
