@@ -95,7 +95,11 @@ router.get("/game/:gameId", async (req, res, next) => {
   try {
     const realID = +req.params.gameId;
     const gameRow = await Game.findByPk(realID);
+    const playersid = gameRow.playerId
+    const nameOfPlayer = await Player.findByPk(playersid);
 
+    console.log(gameRow.result)
+    console.log(gameRow.playerId)
     res.send(`<html lang="en">
     <head>
     <link rel="stylesheet" href="/style/style.css">
@@ -103,7 +107,7 @@ router.get("/game/:gameId", async (req, res, next) => {
         <body>
         <div>
         <p>
-        The game is ${gameRow.result}
+        ${gameRow.result} won the game! and the player's number was ${nameOfPlayer.username}
         </p>
         </div>
         </body>`);
@@ -135,6 +139,31 @@ router.get("/player", async (req, res, next) => {
     next(error);
   }
 });
+
+router.get("/player/:playerId", async ( req,res,next)=>{
+  try{
+    const idOfPlayer = +req.params.playerId;
+    const currentPlayer = await Player.findByPk(idOfPlayer);
+    const gamePlayer = await Game.findAll({      
+    where: {
+        playerId : +req.params.playerId
+      }
+    }
+    )
+
+    res.send(`<body>
+    <h2>${currentPlayer.username}'s Game</h2>
+    <div>
+    ${gamePlayer.map((game)=>
+        `<p>Game Id: ${game.id}, & Result: ${game.result}</p>`
+    ).join("")}
+    </div>
+    </body>`)
+
+  }catch(error){
+    next(error)
+  }
+})
 
 router.post("/", async (req, res, next) => {
   try {
@@ -179,9 +208,9 @@ router.post("/game", async (req, res, next) => {
       },
     });
 
-    await Game.update(
-      {playerId: user.id}, {where: {result : `${finalResult}`}}
-   )
+  //   await Game.update(
+  //     {playerId: user.id}, {where: {result : `${finalResult}`}}
+  //  )
 
     console.log(gameResult.id);
 
@@ -192,7 +221,10 @@ router.post("/game", async (req, res, next) => {
   }
 });
 
+router.put("/player/:playerId", async () => {
 
+
+});
 
 router.use((err, req, res, next) => {
   console.log(err.stack);
